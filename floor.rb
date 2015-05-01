@@ -2,14 +2,13 @@ require_relative './elevator_strategy'
 
 class Floor
 
-	attr_accessor :passengers, :elev_arriving_up, :elev_arriving_down
+	attr_accessor :passengers, :elev_coming
 
 	def initialize(elevator_strategy)
 		@elevator_strategy = elevator_strategy
 		@passengers = Array.new
 		@make_new_request = false		#make a request if not all requests were made
-		@elev_arriving_up = false		#mark true if there is an elevator coming up to this floor, than goes up
-		@elev_arriving_down = false		#same as above if elevator than goes down.
+		@elev_coming = false			#mark true if there is an elevator coming up to this floor
 	end
 
 	#add passengers to the floor
