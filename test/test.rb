@@ -6,6 +6,7 @@
  require_relative './data/person'
  require_relative './data/simul'
  require_relative './data/simulation'
+ 
 
  describe Simulation do
 	before do
