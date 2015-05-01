@@ -55,7 +55,7 @@ class Building
 
 	#compare foor objects by their floor number
 	def compare_f(f1, f2)
-		return (self.floor_number(f1) - self.floor_number(f2))
+		(self.floor_number(f1) - self.floor_number(f2))
 	end
 
 	def clock_tick

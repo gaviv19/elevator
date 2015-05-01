@@ -27,7 +27,8 @@ class Floor
 		@passengers.delete(p)
 	end
 
-	#make requests to elevator_strategy at every tick
+	#make requests to elevator_strategy at every tick, 
+	#IF there are passengers waiting and they have not made a request yet
 	def clock_tick
 		@elevator_strategy.has_incoming_elevators?(self)
 		if not @passengers.empty? && @make_new_request == false
