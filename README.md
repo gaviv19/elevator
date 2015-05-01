@@ -31,6 +31,10 @@ based on floor requests". The class thus is the "puppeteer" in my app.
 
 Each floor, person or elevator send requests to the elevator_strategy to handle, if they are in any need of on.
 
+**********************************************
+
+Design principles:
+
 Floor:
 
 Each floor does not know about the other floors in the building (or elevators), or even about the building itself.
