@@ -62,6 +62,11 @@ class Elevator
 			@destination.push(f)
 		end
 	end
+
+	#setting a new direction
+	def set_direction(direc)
+		@direction = direc
+	end
 	
 end
 
