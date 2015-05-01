@@ -4,7 +4,6 @@ require_relative './floor'
 
 #represents the building as a container of floors and elevators
 
-
 class Building
 
 	attr_accessor :elevators, :elevator_strategy
