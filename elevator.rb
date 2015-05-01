@@ -1,4 +1,3 @@
-
 class Elevator
 
 	attr_accessor :current_floor, :direction, :passengers, :destination
