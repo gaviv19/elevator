@@ -51,7 +51,7 @@ class ElevatorStrategy
 	
 	#decide the elevator e's next move
 	def request_strategy(e)
-		if e.direction == 'waiting'																		  #if waiting
+		if e.direction == 'waiting'												  #if waiting
 			if not e.next_destination.nil?
 				if @building.compare_f(e.next_destination, e.current_floor) > 0	  #and needs to go up, go up
 					e.direction = 'going up'
@@ -59,21 +59,19 @@ class ElevatorStrategy
 					e.direction = 'going down'
 				end
 			end
-		elsif (e.next_destination == e.current_floor) && (e.direction != 'waiting')              #if reached destination, stop and open doors
+		elsif (e.next_destination == e.current_floor) 								 #if reached destination, stop and open doors
 			e.arrived_at_destination
 			e.direction = 'waiting'
 		elsif not e.next_destination.nil?
 			if @building.compare_f(e.next_destination, e.current_floor) > 0 #continue go up if needed
 				e.direction = 'going up'
 				e.current_floor = @building.floor(@building.floor_number(e.current_floor) + 1)
-			elsif @building.compare_f(e.next_destination, e.current_floor) < 0 #continue go down if needed
+			else 																	#continue go down if needed
 				e.direction = 'going down'
 				e.current_floor = @building.floor(@building.floor_number(e.current_floor) - 1)
 			end
-		elsif e.direction == 'going up' && e.current_floor == @building.top_floor				 #stop for emergency
+		else 																		 #stop for emergency
 			e.direction = 'waiting'
-		else
-			e.direction = 'waiting'																 #stop for emergency
 		end
 	end
 
