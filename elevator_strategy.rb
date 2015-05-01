@@ -14,25 +14,29 @@ class ElevatorStrategy
 		f.passengers.each do |p|
 			if (not p.get_floor_dest.nil?) && p.elevator.nil?
 				@building.elevators.each do |e|	
-					if e.current_floor == f && e.direction == 'waiting'		#if e is in f and waits
+					if e.current_floor == f && e.direction == 'waiting'		# if available pick a standing elevator on this elevator.
 						p.get_on_elevator(e)
 						e.add_passengers(p)
 						p_to_unload.push(p)
 						unless e.has_destination?(p.get_floor_dest)
 							e.add_destination(p.get_floor_dest)
 						end
-					elsif (@building.compare_f(f, e.current_floor) > 0 && e.direction == 'going up') || (@building.compare_f(f, e.current_floor) < 0 && e.direction == 'going down') #
+					elsif (@building.compare_f(f, e.current_floor) > 0 && e.direction == 'going up') || (@building.compare_f(f, e.current_floor) < 0 && e.direction == 'going down') #else pick an elevator moving to this floor.
 						if e.next_destination != f 
 							e.force_next_destination(f)
 						end
 						set_up = true	
-					elsif e.direction == 'waiting'
+					elsif e.direction == 'waiting' #else pick a standing elevator on another floor.
 						e.add_destination(p.get_floor_dest)
 						set_up = true
 					end 				#else, if no e in either criteria, wait for the next tick to handle the floor
 				end
 			end
 		end
+		update_floors(f, set_up, set_down, p_to_unload)
+	end
+	
+	def update_floors(f, set_up,set_down, p_to_unload)
 		if set_up
 			f.elev_arriving_up = true 
 		end
@@ -44,7 +48,7 @@ class ElevatorStrategy
 	
 	#decide the elevator e's next move
 	def request_strategy(e)
-		if e.direction == 'waiting'	&& (not e.next_destination.nil?)											  #if waiting
+		if e.direction == 'waiting'	&& (not e.next_destination.nil?)		#if waiting
 			if @building.compare_f(e.next_destination, e.current_floor) > 0	  #and needs to go up, go up
 				e.set_direction('going up')
 			elsif @building.compare_f(e.next_destination, e.current_floor) < 0  #else, if needs down, go down
