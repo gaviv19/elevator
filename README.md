@@ -1,5 +1,7 @@
 # elevator
-"!https://codeclimate.com/github/gaviv19/elevator/badges/gpa.svg!":https://codeclimate.com/github/gaviv19/elevator
+
+<a href="https://codeclimate.com/github/gaviv19/elevator"><img src="https://codeclimate.com/github/gaviv19/elevator/badges/gpa.svg" /></a>
+
 April, 2015
 Brandeis University
 cosi 105b final assignement -- "elevator"
