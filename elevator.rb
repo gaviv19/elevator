@@ -67,6 +67,14 @@ class Elevator
 	def set_direction(direc)
 		@direction = direc
 	end
+
+	def at_dest?
+		if self.next_destination == @current_floor
+			true
+		else
+			false
+		end
+	end
 	
 end
 

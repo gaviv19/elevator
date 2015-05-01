@@ -57,8 +57,8 @@ class ElevatorStrategy
 			elsif @building.compare_f(e.next_destination, e.current_floor) < 0  #else, if needs down, go down
 				e.set_direction('going down')
 			end
-		elsif (e.next_destination == e.current_floor) 								 #if reached destination, stop and open doors
-			e.arrived_at_destination
+		elsif e.at_dest?					 								 #if reached destination, stop and open doors
+				e.arrived_at_destination
 				e.set_direction('waiting')
 		elsif not e.next_destination.nil?
 			if @building.compare_f(e.next_destination, e.current_floor) > 0 #continue go up if needed
