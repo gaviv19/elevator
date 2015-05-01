@@ -17,4 +17,3 @@ building.bottom_floor.add_passengers(person1, person2)
 building.top_floor.add_passengers(person3)
 
 simul.run(13)
-
