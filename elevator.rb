@@ -68,6 +68,7 @@ class Elevator
 		@direction = direc
 	end
 
+	#returns true if arrived at destination
 	def at_dest?
 		if self.next_destination == @current_floor
 			true

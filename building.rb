@@ -26,9 +26,9 @@ class Building
 	end
 
 	#add elevators to the building
-	def add_elevators(bottom_floor, number_of_elevators)
+	def add_elevators(starting_floor, number_of_elevators)
 		number_of_elevators.times do
-			e = Elevator.new(bottom_floor, @elevator_strategy)
+			e = Elevator.new(starting_floor, @elevator_strategy)
 			@elevators << e
 			@sim.register(e)
 		end
@@ -54,7 +54,7 @@ class Building
 		@flrs.index(f)
 	end
 
-	#compare foor objects by their floor number
+	#compare floor objects by their floor number
 	def compare_f(f1, f2)
 		(self.floor_number(f1) - self.floor_number(f2))
 	end
