@@ -2,6 +2,8 @@ require_relative './elevator_strategy'
 require_relative './elevator'
 require_relative './floor'
 
+#represents the building as a container of floors and elevators
+
 
 class Building
 
