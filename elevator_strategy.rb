@@ -14,27 +14,22 @@ class ElevatorStrategy
 		f.passengers.each do |p|
 			if (not p.get_floor_dest.nil?) && p.elevator.nil?
 				@building.elevators.each do |e|	
-					if not @building.floor_number(e.next_destination).nil? #if e has a next desination
-						if e.current_floor == f && e.direction == 'waiting' && ( (@building.compare_f(p.get_floor_dest, f) > 0 && @building.compare_f(e.next_destination, f) > 0) || (@building.compare_f(p.get_floor_dest, f) < 0 && @building.compare_f(e.next_destination, f) < 0) )		#if e is in f, and either e + p go up OR e + p go down
-							p.get_on_elevator(e)
-							e.add_passengers(p)
-							p_to_unload.push(p)
-							unless e.has_destination?(p.get_floor_dest)
-								e.add_destination(p.get_floor_dest)
-							end
+					if e.current_floor == f && e.direction == 'waiting'		#if e is in f and waits
+						p.get_on_elevator(e)
+						e.add_passengers(p)
+						p_to_unload.push(p)
+						unless e.has_destination?(p.get_floor_dest)
+							e.add_destination(p.get_floor_dest)
 						end
-					elsif e.destination.length <= 1 && ( (@building.compare_f(p.get_floor_dest, f) > 0 && @building.compare_f(f, e.current_floor) > 0 && @building.compare_f(e.next_destination, f) > 0 && e.direction == 'going up') || (@building.compare_f(p.get_floor_dest, f) < 0 && @building.compare_f(f, e.current_floor) < 0 && @building.compare_f(e.next_destination, f) < 0 && e.direction == 'going down') ) #if e is coming toward f and has no more than one dest, and either (p needs up AND e continues up) OR (p needs down AND e continues down)
+					elsif (@building.compare_f(f, e.current_floor) > 0 && e.direction == 'going up') || (@building.compare_f(f, e.current_floor) < 0 && e.direction == 'going down') #
 						if e.next_destination != f 
 							e.force_next_destination(f)
 						end
 						set_up = true	
-					elsif e.direction == 'waiting' && e.next_destination.nil?
-						p.get_on_elevator(e)
-						e.add_passengers(p)
-						p_to_unload.push(p)
+					elsif e.direction == 'waiting'
 						e.add_destination(p.get_floor_dest)
 						set_up = true
-					end
+					end 				#else, if no e in either criteria, wait for the next tick to handle the floor
 				end
 			end
 		end
