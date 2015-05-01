@@ -16,9 +16,7 @@ class ElevatorStrategy
 						p.get_on_elevator(e)
 						e.add_passengers(p)
 						p_to_unload.push(p)
-						unless e.has_destination?(p.get_floor_dest)
-							e.add_destination(p.get_floor_dest)
-						end
+						e.add_destination(p.get_floor_dest) unless e.has_destination?(p.get_floor_dest)
 					elsif (@building.compare_f(f, e.current_floor) > 0 && e.direction == 'going up') || (@building.compare_f(f, e.current_floor) < 0 && e.direction == 'going down') #else pick an elevator moving to this floor.
 						if e.next_destination != f 
 							e.force_next_destination(f)
@@ -31,10 +29,6 @@ class ElevatorStrategy
 				end
 			end
 		end
-		update_floors(f, p_to_unload)
-	end
-	
-	def update_floors(f, p_to_unload)
 		p_to_unload.each { |p| f.unload_passenger(p) }
 	end
 	
