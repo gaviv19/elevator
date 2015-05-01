@@ -8,8 +8,6 @@ class ElevatorStrategy
 
 	#handle elevator requests from floors
 	def request_elevator(f)
-		set_up = false
-		set_down = false
 		p_to_unload = Array.new()
 		f.passengers.each do |p|
 			if (not p.get_floor_dest.nil?) && p.elevator.nil?
@@ -25,24 +23,18 @@ class ElevatorStrategy
 						if e.next_destination != f 
 							e.force_next_destination(f)
 						end
-						set_up = true	
+						f.elev_coming = true	
 					elsif e.direction == 'waiting' #else pick a standing elevator on another floor.
 						e.add_destination(p.get_floor_dest)
-						set_up = true
+						f.elev_coming = true	
 					end 				#else, if no e in either criteria, wait for the next tick to handle the floor
 				end
 			end
 		end
-		update_floors(f, set_up, set_down, p_to_unload)
+		update_floors(f, p_to_unload)
 	end
 	
-	def update_floors(f, set_up,set_down, p_to_unload)
-		if set_up
-			f.elev_arriving_up = true 
-		end
-		if set_down
-			f.elev_arriving_down = true
-		end
+	def update_floors(f, p_to_unload)
 		p_to_unload.each { |p| f.unload_passenger(p) }
 	end
 	
@@ -72,15 +64,10 @@ class ElevatorStrategy
 
 	#check for the floor if it has incoming elevators
 	def has_incoming_elevators?(f)
-		f.elev_arriving_down = false
-		f.elev_arriving_up = false
+		f.elev_coming = false
 		@building.elevators.each do |e|
 			if e.next_destination == f
-				if e.direction == 'going down'
-					f.elev_arriving_down = true
-				else
-					f.elev_arriving_up = true
-				end
+				f.elev_coming = true
 			end
 		end
 	end
