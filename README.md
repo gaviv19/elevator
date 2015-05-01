@@ -9,6 +9,17 @@ Aviv Glick
 
 **********************************************
 
+How to use:
+
+You can set as many elevators, floors or people you want in the building.
+The default is 5 floors, 1 elevator, and three people (2 at the bottom floor, 1 at the top floor)
+
+Simply set your own configuration in the simul.rb file.
+
+**********************************************
+
+The idea behind the app:
+
 My elevator program's core idea is that there is one class responsible for the elevator strategy in the building.
 All other classes are "dumb".
 
