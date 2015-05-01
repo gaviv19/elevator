@@ -20,7 +20,7 @@ class ElevatorStrategy
 								p.get_on_elevator(e)
 								e.add_passengers(p)
 								p_to_unload.push(p)
-								if not e.has_destination?(p.get_floor_dest)
+								unless e.has_destination?(p.get_floor_dest)
 									e.add_destination(p.get_floor_dest)
 								end
 							end
