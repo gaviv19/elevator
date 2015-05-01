@@ -1,6 +1,7 @@
 # elevator
 
 <a href="https://codeclimate.com/github/gaviv19/elevator"><img src="https://codeclimate.com/github/gaviv19/elevator/badges/gpa.svg" /></a>
+{<img alt="Status?branch=master" src="https://codeship.com/projects/daafba90-d1e9-0132-00f1-267aebe4cf02/status?branch=master" />}[https://codeship.com/projects/77422]
 
 April, 2015
 Brandeis University
